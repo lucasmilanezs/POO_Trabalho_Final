@@ -3,7 +3,6 @@ package com.example.library.mapper;
 import com.example.library.dto.BookRequest;
 import com.example.library.dto.BookResponse;
 import com.example.library.model.Book;
-import java.time.LocalDateTime;
 
 public class BookMapper {
 
@@ -11,32 +10,37 @@ public class BookMapper {
     }
 
     public static Book toEntity(BookRequest request) {
-        LocalDateTime now = LocalDateTime.now();
         Book book = new Book();
+        book.setIsbn(request.isbn());
         book.setTitle(request.title());
         book.setAuthor(request.author());
         book.setCategory(request.category());
         book.setPublicationYear(request.publicationYear());
-        book.setCreatedAt(now);
-        book.setUpdatedAt(now);
+        book.setSummary(request.summary());
         return book;
     }
 
     public static void updateEntity(Book book, BookRequest request) {
+        book.setIsbn(request.isbn());
         book.setTitle(request.title());
         book.setAuthor(request.author());
         book.setCategory(request.category());
         book.setPublicationYear(request.publicationYear());
-        book.setUpdatedAt(LocalDateTime.now());
+        book.setSummary(request.summary());
     }
 
     public static BookResponse toResponse(Book book) {
         return new BookResponse(
                 book.getId(),
+                book.getIsbn(),
                 book.getTitle(),
                 book.getAuthor(),
                 book.getCategory(),
                 book.getPublicationYear(),
+                book.getSummary(),
+                book.getAvailable(),
+                book.getLastBorrowedAt(),
+                book.getLastReturnedAt(),
                 book.getCreatedAt(),
                 book.getUpdatedAt()
         );
