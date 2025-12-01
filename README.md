@@ -1,6 +1,7 @@
 # Biblioteca API (Spring Boot)
 
 Aplicação em Java Spring Boot que demonstra um CRUD completo e sofisticado para livros usando padrão Service + Mapper, com persistência em banco relacional H2 em memória, filtros avançados e operações de empréstimo/devolução.
+Aplicação simples em Java Spring Boot que demonstra um CRUD completo para livros usando padrão Service + Mapper, com persistência em banco relacional H2 em memória.
 
 ## Stack
 - Java 17 + Spring Boot 3.2
@@ -25,6 +26,10 @@ Aplicação em Java Spring Boot que demonstra um CRUD completo e sofisticado par
 - **GET** `/api/books` – listagem paginada com filtros opcionais (`author`, `category`, `title`, `available`, `yearFrom`, `yearTo`).
 - **PATCH** `/api/books/{id}/checkout` – registra empréstimo e bloqueia novo empréstimo enquanto indisponível.
 - **PATCH** `/api/books/{id}/return` – registra devolução e libera nova retirada.
+- **POST** `/api/books` – cadastra um livro.
+- **PUT** `/api/books/{id}` – altera dados do livro.
+- **GET** `/api/books/{id}` – consulta individual.
+- **GET** `/api/books` – listagem com todos os livros.
 - **DELETE** `/api/books/{id}` – exclusão.
 
 Todas as entradas usam `application/json` com payload:
@@ -36,6 +41,10 @@ Todas as entradas usam `application/json` com payload:
   "category": "Arquitetura",
   "publicationYear": 2003,
   "summary": "Breve sinopse opcional"
+  "title": "Domain-Driven Design",
+  "author": "Eric Evans",
+  "category": "Arquitetura",
+  "publicationYear": 2003
 }
 ```
 
@@ -49,6 +58,12 @@ Todas as entradas usam `application/json` com payload:
 - Cadastro, alteração, consulta, listagem e exclusão.
 - Filtro avançado com paginação por autor, categoria, título, disponibilidade e intervalo de anos.
 - Fluxo de empréstimo e devolução com validações de disponibilidade.
+- **BookService** concentra regras e validações, usando `ResponseStatusException` para retornos HTTP elegantes.
+- **BookMapper** aplica o padrão Mapper para converter entre DTOs e entidades JPA.
+- **BookRepository** (Spring Data JPA) abstrai o acesso ao banco.
+
+## Requisitos atendidos
+- Cadastro, alteração, consulta, listagem e exclusão.
 - Endpoints REST documentados acima.
 - Persistência em banco relacional (H2) configurada em `application.properties`.
 - Padrão de camadas (Controller → Service → Mapper/Repository) para manter o código limpo e coeso.

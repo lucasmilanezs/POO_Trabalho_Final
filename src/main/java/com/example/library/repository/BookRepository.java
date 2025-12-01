@@ -10,4 +10,7 @@ public interface BookRepository extends JpaRepository<Book, Long>, JpaSpecificat
     boolean existsByIsbn(String isbn);
 
     Optional<Book> findByIsbn(String isbn);
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface BookRepository extends JpaRepository<Book, Long> {
 }

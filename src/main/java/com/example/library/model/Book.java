@@ -56,6 +56,9 @@ public class Book {
                 LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.isbn = isbn;
+    public Book(Long id, String title, String author, String category, Integer publicationYear, LocalDateTime createdAt,
+                LocalDateTime updatedAt) {
+        this.id = id;
         this.title = title;
         this.author = author;
         this.category = category;
